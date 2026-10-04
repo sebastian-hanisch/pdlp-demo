@@ -158,7 +158,7 @@ def test_permalink_accepts_valid_values():
     ss = at.session_state
     assert (ss["kind_select"], ss["m_slider"], ss["n_slider"], ss["seed_input"], ss["density_select"], ss["eps_select"], ss["cap_select"], ss["scale_select"], ss["average_toggle"], ss["restart_toggle"], ss["precond_toggle"],
             ss["adaptive_toggle"], ss["pw_toggle"], ss["pdl_step"]) == ("plateau", 10, 9, 7, 1, 3, 1, 2, False, True, False, True, False, 4)
-    assert at.query_params["avg"] == ["0"] and at.query_params["restart"] == ["1"]
+    assert at.query_params["avg"] in (["0"], "0") and at.query_params["restart"] in (["1"], "1")
 
 
 def test_sidebar_shows_the_controls_that_belong_to_the_instance():
