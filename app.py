@@ -60,11 +60,11 @@ st.markdown(
     """
 **Zehntes Stück der Lineare-Programmierung-Reihe.** Der Simplex tauscht Spalten einer Basis, die Inneren Punkte (Stück 8) lösen je Iteration ein lineares Gleichungssystem: beide zerlegen Matrizen, und das wird bei riesigen dünnen LPs teuer.
 **PDLP** (Applegate u. a. 2021) rechnet nur mit **Matrix-Vektor-Produkten**: ein primal-duales Hybrid-Gradienten-Verfahren (PDHG) auf dem Sattelpunkt des LPs, je Iteration zwei Produkte, kein Faktorisieren. Die Grundform
-konvergiert langsam; erst **fünf Bausteine** (Vorkonditionierung, Mittelung, Neustarts, adaptive Schrittweite, Primalgewicht) machen daraus ein Verfahren, das HiGHS, COPT, Xpress und cuOpt anbieten. Vier Fragen, alle gemessen:
+konvergiert langsam; erst **fünf Bausteine** (Vorkonditionierung, Mittelung, Neustarts, adaptive Schrittweite, Primalgewicht) machen daraus ein Verfahren, das HiGHS, COPT, Xpress und cuOpt anbieten. Fünf Fragen, alle gemessen:
 **(1) Der Weg** - wie sieht PDHG aus? **(2) Konvergenz** - wie schnell fallen die Residuen? **(3) Die fünf Bausteine** - was bringt jeder? **(4) Gegen Simplex und Innere Punkte** und **(5) Grenzen** - Genauigkeit, keine Ecke, Skalierung.
 """
 )
-st.caption("Kind der [Inneren Punkte](https://github.com/sebastian-hanisch/innere-punkte-demo); greift die Skalierungsbefunde aus [Präsolve und Numerik](https://github.com/sebastian-hanisch/praesolve-demo) auf. Crossover ist [noch nicht gebaut].")
+st.caption("Kind der [Inneren Punkte](https://github.com/sebastian-hanisch/innere-punkte-demo); greift die Skalierungsbefunde aus [Präsolve und Numerik](https://github.com/sebastian-hanisch/praesolve-demo) auf. Crossover ist gebaut: [crossover-demo](https://github.com/sebastian-hanisch/crossover-demo).")
 
 with st.expander("So funktioniert PDLP", expanded=True):
     st.markdown(
@@ -311,6 +311,6 @@ Implementiert in `pdl_pdlp.py` (PDHG, fünf Bausteine, Strahltests), `pdl_algori
 st.markdown("---")
 st.caption(
     "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
-    "Operations Research und Machine Learning. Interesse an einer maßgeschneiderten Lösung für "
-    "Ihr Unternehmen? [Kontakt aufnehmen](https://sebastianhanisch.net/kontakt.html)"
+    "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
+    "Mehr zur Reihe: [Lineare Programmierung: vom Tableau zum Crossover](https://sebastianhanisch.net/konzepte-lineare-programmierung.html)."
 )
