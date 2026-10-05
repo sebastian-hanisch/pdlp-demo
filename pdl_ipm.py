@@ -201,6 +201,9 @@ def _ipm(inst, method, eps, max_iter, keep, keep_cond, start, start_factor, std)
         if len(res.step_p) >= 8 and max(max(res.step_p[-8:]), max(res.step_d[-8:])) < 1e-6:
             res.status, res.note = "suspect", "Stillstand: die Schritte sind winzig, ein Residuum fällt nicht (Verdacht auf Unzulässigkeit oder Unbeschränktheit, kein Beweis)"
             break
+        if not mu > 0:                                                                    # z s = 0 ohne Zertifikat (z. B. Zielfunktion im Zeilenraum von M, c = 0): kein Newton-Schritt möglich
+            res.status, res.note = "numerical", "Komplementaritätsmaß 0 ohne Optimalitätszertifikat: kein Innenpunkt-Schritt möglich"
+            break
         d = z / s
         try:
             Mat = (M * d) @ M.T
@@ -255,7 +258,7 @@ def _ipm(inst, method, eps, max_iter, keep, keep_cond, start, start_factor, std)
         res.status = "limit"
         if pr > 1e-6 or dr > 1e-6:                                                        # kein Ergebnis in Sicht: die Residuen fallen nicht
             res.status, res.note = "suspect", "Iterationsgrenze, ein Residuum fällt nicht (Verdacht auf Unzulässigkeit oder Unbeschränktheit, kein Beweis)"
-    if res.status in ("optimal", "limit", "numerical") and res.iterations > 0 and np.all(np.isfinite(z)) and np.all(np.isfinite(y)):
+    if res.status in ("optimal", "limit", "numerical") and (res.iterations > 0 or res.status == "optimal") and np.all(np.isfinite(z)) and np.all(np.isfinite(y)):
         res.x, res.y = tuple(float(v) for v in z[:n]), tuple(float(v) for v in y)
         res.obj = -float(c @ z)
     return res
